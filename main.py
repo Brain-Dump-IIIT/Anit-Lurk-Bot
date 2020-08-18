@@ -13,4 +13,4 @@ async def on_message(message):
 
     print(f"{message}")
 
-client.run('NzQ1MzUyNDMwODc0NTI1NzM2.Xzwhiw.D1wT8UeAirj8kNXuh-Rcl3_pyNU')
+client.run('<BOT-TOKEN>')
