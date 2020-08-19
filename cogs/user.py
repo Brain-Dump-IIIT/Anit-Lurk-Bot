@@ -22,6 +22,7 @@ class User(commands.Cog):
         for member in self.bot.get_all_members():
             if member.bot == False:
                 user_db.add_person(member.id)
+        await ctx.send("Done!")
 
 def setup(bot):
     bot.add_cog(User(bot))
