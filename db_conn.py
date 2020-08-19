@@ -15,7 +15,7 @@ class DbConn:
             )
         ''')
 
-    def add_person(user_id):
+    def add_person(self, user_id):
         query = '''
             INSERT OR IGNORE INTO user_stats (user_id, message_count, 
                                                 character_count, score_count)
