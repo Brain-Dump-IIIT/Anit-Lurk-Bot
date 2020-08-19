@@ -15,4 +15,9 @@ class User(commands.Cog):
         await ctx.send_help(ctx.command)
 
     async def on_member_join(user):
-	user_db.add_person(user.id)
+    	user_db.add_person(user.id)
+
+    async def add_all_members():
+        for member in client.get_all_members():
+            if member.bot == False:
+                user_db.add_person(member.id)
