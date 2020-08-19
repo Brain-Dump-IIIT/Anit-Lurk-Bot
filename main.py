@@ -14,9 +14,14 @@ def main():
     bot = commands.Bot(command_prefix=commands.when_mentioned_or(prefix))
     
     def no_dm_check(ctx):
-        if ctx.biuld is None:
+        if ctx.giuld is None:
             raise commands.NoPrivateMEssage('I refuse.')
         return True
+
+    # Add cogs
+    cogs = [file.stem for file in Path('cogs').glob('*py')]
+    for extension in cogs:
+        bot.load_extension(f'cogs.{extension}')
 
     # Restrict bot usage to inside guild channels only.
     bot.add_check(no_dm_check)
