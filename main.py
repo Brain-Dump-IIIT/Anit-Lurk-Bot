@@ -1,3 +1,5 @@
+from discord import commands
+
 def main():
     token = environ.get('BOT_TOKEN')
     if not token:
