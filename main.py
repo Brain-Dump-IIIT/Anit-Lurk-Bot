@@ -1,4 +1,6 @@
-from discord import commands
+from discord.ext import commands
+from os import environ
+from pathlib import Path
 
 def main():
     token = environ.get('BOT_TOKEN')
@@ -14,7 +16,7 @@ def main():
     bot = commands.Bot(command_prefix=commands.when_mentioned_or(prefix))
     
     def no_dm_check(ctx):
-        if ctx.giuld is None:
+        if ctx.guild is None:
             raise commands.NoPrivateMEssage('I refuse.')
         return True
 
@@ -27,3 +29,5 @@ def main():
     bot.add_check(no_dm_check)
 
     bot.run(token)
+
+main()

@@ -1,9 +1,7 @@
-from discord import commands
+from discord.ext import commands
 import db_conn
-import asyncio
-import main
 
-user_db = DbConn('user.db')
+user_db = db_conn.DbConn('user.db')
 
 class User(commands.Cog):
     def __init__(self, bot):
@@ -17,7 +15,13 @@ class User(commands.Cog):
     async def on_member_join(user):
     	user_db.add_person(user.id)
 
-    async def add_all_members():
-        for member in client.get_all_members():
+    @user.command(brief='Add all members')
+    @commands.has_any_role('Admin', 'Moderator')
+    async def addall(self, ctx):
+        """Adds all members to db"""
+        for member in self.bot.get_all_members():
             if member.bot == False:
                 user_db.add_person(member.id)
+
+def setup(bot):
+    bot.add_cog(User(bot))
