@@ -21,7 +21,7 @@ class User(commands.Cog):
         """Adds all members to db"""
         for member in self.bot.get_all_members():
             if member.bot == False:
-                user_db.add_person(member.id)
+                DbConn.add_person(user_db, member.id)
 
 def setup(bot):
     bot.add_cog(User(bot))
