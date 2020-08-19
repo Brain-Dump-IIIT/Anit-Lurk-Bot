@@ -1,16 +1,22 @@
-import discord
-import db_conn
-import asyncio
-
-client = discord.Client()
-
-user_db = db_conn.DbConn('user.db')
-
-@client.event
-async def on_message(message):
-    if (message.author == client.user):
+def main():
+    token = environ.get('BOT_TOKEN')
+    if not token:
+        print('NO TOKEN')
         return
 
-    print(f"{message}")
+    prefix = environ.get('BOT_PREFIX')
+    if not prefix:
+        print('NO PREFIX')
+        return
 
-client.run('<BOT-TOKEN>')
+    bot = commands.Bot(command_prefix=commands.when_mentioned_or(prefix))
+    
+    def no_dm_check(ctx):
+        if ctx.biuld is None:
+            raise commands.NoPrivateMEssage('I refuse.')
+        return True
+
+    # Restrict bot usage to inside guild channels only.
+    bot.add_check(no_dm_check)
+
+    bot.run(token)
