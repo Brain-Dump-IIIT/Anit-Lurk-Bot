@@ -36,14 +36,14 @@ class DbConn:
         self.conn.execute(query, (user_id,))
         self.conn.commit()
 
-    def message_count_increment(self, user_id, char_count, score_count):
+    def message_count_increment(self, user_id, mess_count, char_count, score_count):
         """Updates values for users"""
         query = '''
-            UPDATE user_stats SET message_count = message_count + 1,
+            UPDATE user_stats SET message_count = message_count + ?,
                         character_count = character_count + ?,
                         score_count = score_count + ?
             WHERE user_id = ?
         '''
 
-        self.conn.execute(query, (char_count, score_count, user_id, ))
+        self.conn.execute(query, (mess_count, char_count, score_count, user_id, ))
         self.conn.commit()
