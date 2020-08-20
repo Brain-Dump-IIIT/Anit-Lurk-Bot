@@ -30,4 +30,5 @@ def main():
 
     bot.run(token)
 
-main()
+if __name__ == '__main__':
+    main()
