@@ -47,3 +47,12 @@ class DbConn:
 
         self.conn.execute(query, (mess_count, char_count, score_count, user_id, ))
         self.conn.commit()
+
+    def reset(self):
+        """Reset score of all people in db"""
+        query = '''
+            UPDATE user_stats SET score_count = 0
+        '''
+
+        self.conn.execute(query)
+        self.conn.commit()

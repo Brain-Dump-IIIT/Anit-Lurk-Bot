@@ -14,7 +14,6 @@ class User(commands.Cog):
     async def user(self, ctx):
         """Commands to get Activity List"""
         await ctx.send_help(ctx.command)
-        print('AAng')
 
     @commands.Cog.listener()
     async def on_member_join(self, user):
@@ -56,6 +55,12 @@ class User(commands.Cog):
 
         user_db.message_count_increment(message.author.id, -1,
                 -len(message.content), -1)
+
+    @user.command(brief='Resets score of all members')
+    @commands.has_any_role('Admin', 'Moderator')
+    async def reset(self, ctx):
+        """Reset score of all members"""
+        user_db.reset()
 
 def setup(bot):
     bot.add_cog(User(bot))
