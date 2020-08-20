@@ -11,9 +11,19 @@ class User(commands.Cog):
     async def user(self, ctx):
         """Commands to get Activity List"""
         await ctx.send_help(ctx.command)
+        print('AAng')
 
-    async def on_member_join(user):
-    	user_db.add_person(user.id)
+    @commands.Cog.listener()
+    async def on_member_join(self, user):
+        """Add person to db on member join"""
+        user_db.add_person(user.id)
+        print(user.display_name)
+
+    @commands.Cog.listener()
+    async def on_member_remove(self, user):
+        """Remove person from db on member leave"""
+        user_db.remove_person(user.id)
+        print(user.display_name)
 
     @user.command(brief='Add all members')
     @commands.has_any_role('Admin', 'Moderator')

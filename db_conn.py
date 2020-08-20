@@ -16,6 +16,7 @@ class DbConn:
         ''')
 
     def add_person(self, user_id):
+        """Adds a person to db or ignores if already present"""
         query = '''
             INSERT OR IGNORE INTO user_stats (user_id, message_count, 
                                                 character_count, score_count)
@@ -25,7 +26,18 @@ class DbConn:
         self.conn.execute(query, (user_id,))
         self.conn.commit()
 
+    def remove_person(self, user_id):
+        """Removes a person from db"""
+        query = '''
+            DELETE FROM user_stats
+            WHERE user_id = ?
+        '''
+
+        self.conn.execute(query, (user_id,))
+        self.conn.commit()
+
     def message_count_increment(self, user_id, char_count, score_count):
+        """Updates values for users"""
         query = '''
             UPDATE user_stats SET message_count = message_count + 1,
                         character_count = character_count + ?,
