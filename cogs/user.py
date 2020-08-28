@@ -1,5 +1,5 @@
 from discord.ext import commands
-import db_conn
+import utils.db_conn as db_conn
 
 user_db = db_conn.DbConn('user.db')
 

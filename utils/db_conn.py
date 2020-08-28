@@ -63,4 +63,4 @@ class DbConn:
             SELECT user_id, score_count FROM user_stats;
         '''
 
-        return self.conn.execute(query)
+        return self.conn.execute(query).fetchall()
