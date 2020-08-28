@@ -56,3 +56,11 @@ class DbConn:
 
         self.conn.execute(query)
         self.conn.commit()
+
+    def get_user_list(self):
+        """Returns list of users along with their message count"""
+        query = '''
+            SELECT user_id, score_count FROM user_stats;
+        '''
+
+        return self.conn.execute(query)
